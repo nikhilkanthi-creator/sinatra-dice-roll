@@ -2,17 +2,26 @@
 
 require "sinatra"
 require "sinatra/reloader"
+require "better_errors"
+require "binding_of_caller"
+
+# Need this configuration for better_errors
+use(BetterErrors::Middleware)
+BetterErrors.application_root = __dir__
+BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 get ("/") do
-  "Hello World"
-end
+  html = <<-HTML
+  <h1>Dice Roll</h1>
+  <p>Click the links to get started</p>
+  <a href="https://refactored-space-spork-7vwprvjrw69rfwr45-4567.app.github.dev/dice/2/6"> Roll two 6-sided dye </a>
+  <a href="https://refactored-space-spork-7vwprvjrw69rfwr45-4567.app.github.dev/dice/2/10"> Roll two 10-sided dye </a>
+  <a href="https://refactored-space-spork-7vwprvjrw69rfwr45-4567.app.github.dev/dice/5/4"> Roll five 4-sided dye </a>
 
-get ("/zebra") do
-  "We must add a route for each path we want to support"
-end
 
-get ("/giraffe") do
-  "Hopefully this shows up without having to restart the server 🤞🏾"
+  HTML
+
+  return html
 end
 
 get ("/dice/2/6") do
