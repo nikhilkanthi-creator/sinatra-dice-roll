@@ -11,17 +11,7 @@ BetterErrors.application_root = __dir__
 BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 get ("/") do
-  html = <<-HTML
-  <h1>Dice Roll</h1>
-  <p>Click the links to get started</p>
-  <a href="https://refactored-space-spork-7vwprvjrw69rfwr45-4567.app.github.dev/dice/2/6"> Roll two 6-sided dye </a>
-  <a href="https://refactored-space-spork-7vwprvjrw69rfwr45-4567.app.github.dev/dice/2/10"> Roll two 10-sided dye </a>
-  <a href="https://refactored-space-spork-7vwprvjrw69rfwr45-4567.app.github.dev/dice/5/4"> Roll five 4-sided dye </a>
-
-
-  HTML
-
-  return html
+  erb(:elephant)
 end
 
 get ("/dice/2/6") do
@@ -29,10 +19,8 @@ get ("/dice/2/6") do
   second_die = rand(1..6)
   sum = first_die + second_die
 
-  outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}"
-
-  "<h1>2d6</h1>
-  <p>#{outcome}</p>"
+  @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}"
+  erb(:two_six)
 end
 
 get("/dice/2/10") do
@@ -40,17 +28,16 @@ get("/dice/2/10") do
   second_die = rand(1..10)
   sum = first_die + second_die
 
-  outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}"
+  @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}"
 
-  "<h1>2d6</h1>
-  <p>#{outcome}</p>"
+  erb(:two_ten)
 end
 
 get("/dice/1/20") do
   first_die = rand(1..20)
-  outcome = "You rolled a #{first_die}"
-  "<h1>1d10</h1>
-  <p>#{outcome}</p>"
+  @outcome = "You rolled a #{first_die}"
+  
+  erb(:one_twenty)
 end
 
 get("/dice/5/4") do
