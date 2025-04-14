@@ -8,6 +8,12 @@
 
 <body>
   <h1>1d20</h1>
-  <p><%= @outcome %></p>
-  </body>
-  </html>
+  <% if @first_die.even? %>
+  <p style="color: red"><%= @outcome %></p>
+  <% elsif @first_die.odd? %>
+  <p style="color: green"><%= @outcome %></p>
+  <% else %>
+  <p><%= @outcome %>
+  <% end %>
+</body>
+</html>
