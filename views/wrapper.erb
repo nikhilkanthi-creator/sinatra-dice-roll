@@ -1,0 +1,29 @@
+<!-- /views/wrapper.erb -->
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>DiceRoll</title>
+
+<style>
+.navbar{
+  display:flex;
+  justify-content: space-around;
+}
+</style>
+</head>
+
+<body>
+  <div>
+  <div class="navbar">
+    <div><a href="/">Home</a></div>
+    <div><a href="/dice/2/6">2dice6sides</a></div>
+    <div><a href="/dice/2/10">2dice10sides</a></div>
+    <div><a href="/dice/5/4">5dice4sides</a></div>
+  </div>
+
+<%= yield %>
+<!-- Here's the part that varies from page to page -->
+
+</body>
+</html>

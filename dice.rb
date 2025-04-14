@@ -11,7 +11,7 @@ BetterErrors.application_root = __dir__
 BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 get ("/") do
-  erb(:elephant)
+  erb(:elephant, { :layout => :wrapper})
 end
 
 get ("/dice/2/6") do
@@ -20,7 +20,7 @@ get ("/dice/2/6") do
   sum = first_die + second_die
 
   @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}"
-  erb(:two_six)
+  erb(:two_six, { :layout => :wrapper})
 end
 
 get("/dice/2/10") do
@@ -30,14 +30,14 @@ get("/dice/2/10") do
 
   @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}"
 
-  erb(:two_ten)
+  erb(:two_ten, { :layout => :wrapper})
 end
 
 get("/dice/1/20") do
   first_die = rand(1..20)
   @outcome = "You rolled a #{first_die}"
   
-  erb(:one_twenty)
+  erb(:one_twenty, { :layout => :wrapper})
 end
 
 get("/dice/5/4") do
@@ -48,7 +48,6 @@ get("/dice/5/4") do
   fifth_die = rand(1..4)
   sum = first_die + second_die + third_die + fourth_die + fifth_die
 
-  outcome = "You rolled #{first_die}, #{second_die}, #{third_die}, #{fourth_die} and #{fifth_die} for a total of #{sum}"
-  "<h1>5d4</h1>
-  <p>#{outcome}</p>"
+  @outcome = "You rolled #{first_die}, #{second_die}, #{third_die}, #{fourth_die} and #{fifth_die} for a total of #{sum}"
+  erb(:five_four, { :layout => :wrapper})
 end
